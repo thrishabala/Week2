@@ -1,0 +1,69 @@
+import java.util.LinkedHashMap;
+
+class Student {
+    int id;
+    String name;
+    char grade;
+
+    public Student(int id, String name, char grade) {
+        this.id = id;
+        this.name = name;
+        this.grade = grade;
+    }
+
+    @Override
+    public String toString() {
+        return "Student ID: " + id + ", Name: " + name + ", Grade: " + grade;
+    }
+}
+
+public class StudentGrades {
+    private LinkedHashMap<Integer, Student> students;
+
+    public StudentGrades() {
+        students = new LinkedHashMap<>();
+    }
+
+    public void addStudent(Student student) {
+        students.put(student.id, student);
+        System.out.println("Student added: " + student.name);
+    }
+
+    public void removeStudent(int studentId) {
+        students.remove(studentId);
+        System.out.println("Student with ID " + studentId + " removed.");
+    }
+
+    public void updateStudentGrade(int studentId, char newGrade) {
+        Student student = students.get(studentId);
+        if (student != null) {
+            student.grade = newGrade;
+            System.out.println("Updated grade for " + student.name);
+        }
+    }
+
+    public void displayStudents() {
+        System.out.println("Students List:");
+        for (Student student : students.values()) {
+            System.out.println(student);
+        }
+    }
+}
+
+// Test Class
+public class StudentGradesTest {
+    public static void main(String[] args) {
+        StudentGrades grades = new StudentGrades();
+        grades.addStudent(new Student(1, "Alice", 'A'));
+        grades.addStudent(new Student(2, "Bob", 'B'));
+        grades.addStudent(new Student(3, "Charlie", 'C'));
+
+        grades.displayStudents();
+
+        grades.updateStudentGrade(2, 'A');
+        grades.displayStudents();
+
+        grades.removeStudent(1);
+        grades.displayStudents();
+    }
+}
