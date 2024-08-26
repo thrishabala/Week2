@@ -1,0 +1,70 @@
+import java.util.ArrayList;
+
+class Employee {
+    int id;
+    String name;
+    String address;
+
+    public Employee(int id, String name, String address) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + id + ", Name: " + name + ", Address: " + address;
+    }
+}
+
+public class EmployeeManagement {
+    private ArrayList<Employee> employees;
+
+    public EmployeeManagement() {
+        employees = new ArrayList<>();
+    }
+
+    public void addEmployee(Employee employee) {
+        employees.add(employee);
+        System.out.println("Employee added: " + employee.name);
+    }
+
+    public void removeEmployee(int employeeId) {
+        employees.removeIf(emp -> emp.id == employeeId);
+        System.out.println("Employee with ID " + employeeId + " removed.");
+    }
+
+    public void updateEmployee(int employeeId, String newAddress) {
+        for (Employee emp : employees) {
+            if (emp.id == employeeId) {
+                emp.address = newAddress;
+                System.out.println("Updated address for " + emp.name);
+                break;
+            }
+        }
+    }
+
+    public void displayEmployees() {
+        System.out.println("Employee List:");
+        for (Employee emp : employees) {
+            System.out.println(emp);
+        }
+    }
+}
+
+// Test Class
+public class EmployeeManagementTest {
+    public static void main(String[] args) {
+        EmployeeManagement management = new EmployeeManagement();
+        management.addEmployee(new Employee(1, "John Doe", "123 Main St"));
+        management.addEmployee(new Employee(2, "Jane Smith", "456 Oak Ave"));
+
+        management.displayEmployees();
+
+        management.updateEmployee(1, "789 Pine Rd");
+        management.displayEmployees();
+
+        management.removeEmployee(2);
+        management.displayEmployees();
+    }
+}
