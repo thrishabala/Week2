@@ -1,0 +1,47 @@
+import java.util.LinkedHashSet;
+
+public class BookCollection {
+    private LinkedHashSet<String> books;
+
+    public BookCollection() {
+        books = new LinkedHashSet<>();
+    }
+
+    public void addBook(String bookTitle) {
+        if (books.add(bookTitle)) {
+            System.out.println(bookTitle + " added successfully.");
+        } else {
+            System.out.println(bookTitle + " already exists.");
+        }
+    }
+
+    public void removeBook(String bookTitle) {
+        if (books.remove(bookTitle)) {
+            System.out.println(bookTitle + " removed successfully.");
+        } else {
+            System.out.println(bookTitle + " does not exist.");
+        }
+    }
+
+    public void displayBooks() {
+        System.out.println("Book Collection:");
+        for (String book : books) {
+            System.out.println(book);
+        }
+    }
+}
+
+// Test Class
+public class BookCollectionTest {
+    public static void main(String[] args) {
+        BookCollection collection = new BookCollection();
+        collection.addBook("1984");
+        collection.addBook("Brave New World");
+        collection.addBook("The Catcher in the Rye");
+
+        collection.displayBooks();
+
+        collection.removeBook("1984");
+        collection.displayBooks();
+    }
+}
