@@ -1,0 +1,59 @@
+import java.util.LinkedList;
+
+class Order {
+    int orderId;
+    String orderDetails;
+
+    public Order(int orderId, String orderDetails) {
+        this.orderId = orderId;
+        this.orderDetails = orderDetails;
+    }
+
+    @Override
+    public String toString() {
+        return "Order ID: " + orderId + ", Details: " + orderDetails;
+    }
+}
+
+public class OrderTracking {
+    private LinkedList<Order> orders;
+
+    public OrderTracking() {
+        orders = new LinkedList<>();
+    }
+
+    public void addOrder(Order order) {
+        orders.add(order);
+        System.out.println("Order added: " + order.orderId);
+    }
+
+    public Order processOrder() {
+        Order order = orders.poll();
+        if (order != null) {
+            System.out.println("Processing order: " + order.orderId);
+        }
+        return order;
+    }
+
+    public void displayOrders() {
+        System.out.println("Orders List:");
+        for (Order order : orders) {
+            System.out.println(order);
+        }
+    }
+}
+
+// Test Class
+public class OrderTrackingTest {
+    public static void main(String[] args) {
+        OrderTracking tracking = new OrderTracking();
+        tracking.addOrder(new Order(1, "Pizza"));
+        tracking.addOrder(new Order(2, "Pasta"));
+        tracking.addOrder(new Order(3, "Salad"));
+
+        tracking.displayOrders();
+
+        tracking.processOrder();
+        tracking.displayOrders();
+    }
+}
