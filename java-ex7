@@ -1,0 +1,68 @@
+import java.util.HashMap;
+
+class Product {
+    int id;
+    String name;
+    int quantity;
+
+    public Product(int id, String name, int quantity) {
+        this.id = id;
+        this.name = name;
+        this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "Product ID: " + id + ", Name: " + name + ", Quantity: " + quantity;
+    }
+}
+
+public class InventoryManagement {
+    private HashMap<Integer, Product> products;
+
+    public InventoryManagement() {
+        products = new HashMap<>();
+    }
+
+    public void addProduct(Product product) {
+        products.put(product.id, product);
+        System.out.println("Product added: " + product.name);
+    }
+
+    public void removeProduct(int productId) {
+        products.remove(productId);
+        System.out.println("Product with ID " + productId + " removed.");
+    }
+
+    public void updateProductQuantity(int productId, int newQuantity) {
+        Product product = products.get(productId);
+        if (product != null) {
+            product.quantity = newQuantity;
+            System.out.println("Updated quantity for " + product.name);
+        }
+    }
+
+    public void displayProducts() {
+        System.out.println("Inventory List:");
+        for (Product product : products.values()) {
+            System.out.println(product);
+        }
+    }
+}
+
+// Test Class
+public class InventoryManagementTest {
+    public static void main(String[] args) {
+        InventoryManagement management = new InventoryManagement();
+        management.addProduct(new Product(1, "Laptop", 10));
+        management.addProduct(new Product(2, "Smartphone", 20));
+
+        management.displayProducts();
+
+        management.updateProductQuantity(1, 15);
+        management.displayProducts();
+
+        management.removeProduct(2);
+        management.displayProducts();
+    }
+}
